@@ -2,7 +2,8 @@
 
 {% block content %}
 
-<div class='container'>
+<div class='container w-25'>
+  <h2 class='h2 text-center mt-3 mb-3'>Sign in to Your Account</h2>
   <form method='post' acion='/signin'>
     {% csrf_token %}
     <div class="mb-3">
@@ -13,7 +14,9 @@
       <label for="exampleInputPassword1" class="form-label">Password</label>
       <input type="password" class="form-control" name='pass1' id="pass1" placeholder='Enter Your Password'>
     </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
+    <div class='d-flex justify-content-center'>
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
   </form>
 </div>
 

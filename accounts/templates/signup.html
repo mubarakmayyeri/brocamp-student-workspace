@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div class='container'>
-  <h2 class='h2 text-center'>Creat an Account</h2>
+<div class='container w-25'>
+  <h2 class='h2 text-center mt-3 mb-3'>Creat an Account</h2>
   <form method='post' action='/signup'>
     {% csrf_token %}
     <div class="mb-3">
@@ -30,7 +30,9 @@
       <label for="" class="form-label">Confirm Password</label>
       <input type="password" class="form-control" name='pass2' id="pass2" placeholder='Confirm Your Password'>
     </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
+    <div class='d-flex justify-content-center'>
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </div>
   </form>
 </div>
 
