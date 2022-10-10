@@ -18,19 +18,35 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/workspace/tasks">Tasks</a>
+              <a class="nav-link" href="/tasks">Tasks</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/workspace/profile">Profile</a>
+              <a class="nav-link" href="/profile">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/workspace/contact">Contact</a>
+              <a class="nav-link" href="/contact">Contact</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="/signin">
-                <button class='btn btn-sm btn-secondary'>Login</button>
+              <a class="nav-link" href='{% url "signout" %}'>
+                <button class='btn btn-sm btn-secondary'>Logout</button>
               </a>
             </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href='{% url "signin" %}'>
+                  <button class='btn btn-sm btn-secondary'>Login</button>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href='{% url "signup" %}'>
+                  <button class='btn btn-sm btn-secondary'>Register</button>
+                </a>
+              </li>
+
+            {% endif %}
+            
+           
           </ul>
         </div>
       </div>
