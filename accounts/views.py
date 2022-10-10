@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
+from .forms import SigninForm
+
 # Create your views here.
 
 def home(request):
@@ -24,26 +26,33 @@ def signup(request):
   return render(request, 'signup.html')
 
 def signin(request):
-  if 'username' in request.session:
-    return redirect('workspace')
- 
-  if request.method == 'POST':
-    username = request.POST['username']
-    pass1 = request.POST['pass1']
-    
-    user = authenticate(username=username, password=pass1)
-    
-    if user is not None:
-      request.session['username'] = username
-      login(request, user)
-      return render(request, 'workspace.html', {'uname':username})
-      
+    if 'username' in request.session:
+        return redirect('workspace')
+  
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SigninForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            
+            user = authenticate(username=username, password=password)
+            
+            if user is not None:
+                request.session['username'] = username
+                login(request, user)
+                return render(request, 'workspace.html', {'uname':username})
+            else:
+                messages.error(request, "Wrong username/password")
+                return redirect('signin')
+
+    # if a GET (or any other method) we'll create a blank form
     else:
-      messages.error(request, "Wrong username/password")
-      return redirect('signin')
-    
-    
-  return render(request, 'signin.html')
+        form = SigninForm()
+
+    return render(request, 'signin.html', {'form': form})
 
 def signout(request):
   if 'username' in request.session:
@@ -69,3 +78,4 @@ def profile(request):
 
 def contact(request):
   return HttpResponse('<h1>Contact Page</h1>')
+

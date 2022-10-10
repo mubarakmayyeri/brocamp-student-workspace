@@ -10,5 +10,5 @@ urlpatterns = [
     path('workspace', views.workspace, name='workspace'),
     path('tasks', views.tasks, name='tasks'),
     path('profile', views.profile, name='profile'),
-    path('contact', views.contact, name='contact')
+    path('contact', views.contact, name='contact'),
 ]
