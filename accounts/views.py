@@ -11,7 +11,7 @@ from .forms import SigninForm
 
 def home(request):
   if 'username' in request.session:
-    return render(request, 'workspace.html')
+    return redirect('workspace')
   return render(request, 'home.html')
 
 def signup(request):
