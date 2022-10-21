@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
-from .forms import SigninForm
+from .forms import SigninForm, SignupForm
 
 # Create your views here.
 
@@ -19,11 +19,28 @@ def signup(request):
     username = request.POST['username']
     fname = request.POST['fname']
     lname = request.POST['lname']
-    emailpass1 = request.POST['emailpass1']
+    email = request.POST['email']
     pass1 = request.POST['pass1']
     pass2 = request.POST['pass2']
+    
+    if pass1 == pass2:
+      myuser = User.objects.create_user(username, email, pass1)
+      myuser.first_name = fname
+      myuser.last_name = lname
+      
+      myuser.save()
+      
+      messages.success(request, "Your Account has been successfully created.")
+      return redirect(signin)
+    else:
+      messages.error(request, "Passwords doesn't match!!!")
+      return redirect(signup)
+      
   
-  return render(request, 'signup.html')
+  else:
+    form = SignupForm()
+
+    return render(request, 'signup.html', {'form': form})
 
 def signin(request):
     if 'username' in request.session:
