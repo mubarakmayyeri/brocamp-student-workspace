@@ -24,12 +24,12 @@ def signup(request):
     pass2 = request.POST['pass2']
     
     if User.objects.filter(username=username):
-      messages.error(request, "User name already exists!!! Please try with differnet username.")
-      return redirect(signin)
+      messages.error(request, "User name already exists!!! Please try with a different username.")
+      return redirect(signup)
     
     if User.objects.filter(email=email):
       messages.error(request, "Email already registerd!!!")
-      return redirect(signin)
+      return redirect(signup)
     
     if pass1 == pass2:
       myuser = User.objects.create_user(username, email, pass1)

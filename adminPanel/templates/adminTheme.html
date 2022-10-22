@@ -18,6 +18,11 @@
           <ul class="navbar-nav ms-auto mb-lg-0">
             {% if user.is_authenticated %}
             <li class="nav-item">
+              <a class="nav-link" href='{% url "addStudent" %}'>
+                <button class='btn btn-sm btn-warning'>Add New Student</button>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href='{% url "adminLogout" %}'>
                 <button class='btn btn-sm btn-dark'>Logout</button>
               </a>

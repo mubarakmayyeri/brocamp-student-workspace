@@ -4,8 +4,10 @@ from django.contrib import messages
 
 from django.contrib.auth.models import User
 
+from .models import Students
 
-from .forms import LoginForm
+from passlib.hash import pbkdf2_sha256
+from .forms import LoginForm, CreateStudent, AddStudent
 
 # Create your views here.
 
@@ -40,7 +42,7 @@ def adminLogin(request):
   else:
         form = LoginForm()
 
-  return render(request, 'login.html', {'form': form})
+  return render(request, 'adminLogin.html', {'form': form})
 
 def adminHome(request):
   if 'username' in request.session:
@@ -48,15 +50,48 @@ def adminHome(request):
     return render(request, 'adminHome.html', {'students':students})
   return redirect(adminLogin)
 
-def deleteStudent(request, id):
-  if request.method == 'POST':
-    student = User.objects.get(pk=id)
-    student.delete()
-    return redirect(adminHome)
-
-def editStudent(request):
+def addStudent(request):
   if 'username' in request.session:
-    return render(request, 'update.html')
+    if request.method == 'POST':
+      username = request.POST['username']
+      fname = request.POST['fname']
+      lname = request.POST['lname']
+      email = request.POST['email']
+      pass1 = request.POST['pass1']
+      
+      if User.objects.filter(username=username):
+        messages.error(request, "User name already exists!!! Please try with differnet username.")
+        return redirect(addStudent)
+      
+      if User.objects.filter(email=email):
+        messages.error(request, "Email already registerd!!!")
+        return redirect(addStudent)
+      
+      else:
+        myuser = User.objects.create_user(username, email, pass1)
+        myuser.first_name = fname
+        myuser.last_name = lname
+        
+        myuser.save()
+        
+        messages.success(request, "Added student Succesfully.")
+        return redirect(addStudent)
+    else:
+      form = CreateStudent()
+    return render(request, 'addStudent.html', {'form':form})
+  return redirect(adminLogin)
+
+def deleteStudent(request, id):
+  if 'username' in request.session:
+    if request.method == 'POST':
+      student = User.objects.get(pk=id)
+      student.delete()
+      return redirect(adminHome)
+  return redirect(adminLogin)
+
+def editStudent(request, id):
+  if 'username' in request.session:
+    return render(request, 'editStudent.html', {'id':id})
   return redirect(adminLogin)
 
 def adminLogout(request):
