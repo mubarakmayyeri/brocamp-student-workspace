@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+from django.contrib.auth.models import User
+
 
 from .forms import LoginForm
 
@@ -26,7 +28,7 @@ def adminLogin(request):
               if user.is_superuser:
                 request.session['username'] = username
                 login(request, user)
-                return render(request, 'adminHome.html')
+                return redirect(adminLogin)
               else:
                 messages.error(request, "You are not authorized to access this webpage!!!")
                 return redirect('adminLogin')
@@ -42,7 +44,8 @@ def adminLogin(request):
 
 def adminHome(request):
   if 'username' in request.session:
-    return render(request, 'adminHome.html')
+    students = User.objects.all()
+    return render(request, 'adminHome.html', {'students':students})
   return redirect(adminLogin)
 
 def update(request):
