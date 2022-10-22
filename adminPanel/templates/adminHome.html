@@ -29,7 +29,10 @@
                 <td>{{student.last_name}}</td>
                 <td>{{student.email}}</td>
                 <td><a href="#" class='btn btn-sm btn-warning me-3'>Edit </a>
-                  <a href="#" class='btn btn-sm btn-danger'>Delete </a></td>
+                  <form action="{% url 'deleteStudent' student.id %} " method="post" class="d-inline">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-sm btn-danger" value="Delete" onclick = "return confirm('Are you sure to delete {{student.username}}?')">
+                  </form>
               </tr>
             
             {% endfor %}

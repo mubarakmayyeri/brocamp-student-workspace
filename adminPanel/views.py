@@ -48,7 +48,13 @@ def adminHome(request):
     return render(request, 'adminHome.html', {'students':students})
   return redirect(adminLogin)
 
-def update(request):
+def deleteStudent(request, id):
+  if request.method == 'POST':
+    student = User.objects.get(pk=id)
+    student.delete()
+    return redirect(adminHome)
+
+def editStudent(request):
   if 'username' in request.session:
     return render(request, 'update.html')
   return redirect(adminLogin)
