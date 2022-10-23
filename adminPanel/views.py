@@ -4,10 +4,12 @@ from django.contrib import messages
 
 from django.contrib.auth.models import User
 
+from accounts.forms import SignupForm
+
 from .models import Students
 
 from passlib.hash import pbkdf2_sha256
-from .forms import LoginForm, CreateStudent, AddStudent
+from .forms import EditStudent, LoginForm, CreateStudent
 
 # Create your views here.
 
@@ -91,7 +93,15 @@ def deleteStudent(request, id):
 
 def editStudent(request, id):
   if 'username' in request.session:
-    return render(request, 'editStudent.html', {'id':id})
+    if request.method == 'POST':
+      db_data = User.objects.get(pk=id)
+      form = EditStudent(request.POST, instance=db_data)
+      if form.is_valid():        
+        form.save()
+    else:
+      db_data = User.objects.get(pk=id)
+      form = EditStudent(instance=db_data)
+      return render(request, 'editStudent.html', {'form':form})
   return redirect(adminLogin)
 
 def adminLogout(request):
