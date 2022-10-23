@@ -1,0 +1,21 @@
+{% extends 'adminTheme.html' %}
+
+
+{% block content %}
+
+<div class='container mt-5 mb-5'  style="min-height: 450px;">
+  {% include 'messages.html' %}
+  <h2 class='h2 mt-3 text-center mb-3'>Add New Student</h2>
+  <div class='container w-25 mt-4 mb-3'>
+    <form method='post' acion='/addStudent'>
+      {% csrf_token %}
+      {{ form.as_div }}
+      <div class='d-flex justify-content-center mt-4'>
+        <button type="submit" class="btn btn-dark">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+{% endblock content %}
