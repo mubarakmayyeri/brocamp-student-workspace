@@ -7,11 +7,11 @@ This is a **workspace for Brocamp students** where they can manage and monitor B
 * Login and Logout system with session handling.
 * List of registered students.
 * Edit existing student details.
-* Delete a registerd user.
+* Delete a registered user.
 * Create new student account.
 
 ### User side
-* Signin and Signup options.
+* Sign In and Sign Up options.
 * Session handling.
 * Workspace page.
 
@@ -42,6 +42,6 @@ This is a **workspace for Brocamp students** where they can manage and monitor B
 
 ## **References**
 
-* **Django Documentaioin** - https://docs.djangoproject.com/en/4.1/
+* **Django Documentation** - https://docs.djangoproject.com/en/4.1/
 * **geekforgeeks** - https://www.youtube.com/watch?v=1UvTNMH7zDo&t=3104s
 * **Geeky Shows** - https://www.youtube.com/watch?v=OPc_oMgjhpM
