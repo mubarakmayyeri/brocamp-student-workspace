@@ -1,6 +1,6 @@
 from dataclasses import fields
 from django import forms
-from .models import Students
+from .models import Student
 from django.contrib.auth.models import User
 
 class LoginForm(forms.Form):

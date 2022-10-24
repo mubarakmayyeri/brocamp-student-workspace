@@ -4,11 +4,8 @@ from django.contrib import messages
 
 from django.contrib.auth.models import User
 
-from accounts.forms import SignupForm
+from .models import Student
 
-from .models import Students
-
-from passlib.hash import pbkdf2_sha256
 from .forms import EditStudent, LoginForm, CreateStudent
 
 # Create your views here.
