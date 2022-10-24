@@ -26,19 +26,19 @@ This is a **workspace for Brocamp students** where they can manage and monitor B
 ## **Demo**
 #### Home page 
 
-![Home](https://github.com/mubarakmayyeri/brocamp-student-workspace/blob/main/assets/github/1.jpg)
+![Home](https://github.com/mubarakmayyeri/brocamp-student-workspace/blob/master/assets/github/1.jpg)
 
 #### Workspace for Students
 
-![Workspace](https://github.com/mubarakmayyeri/brocamp-student-workspace/blob/main/assets/github/2.jpg)
+![Workspace](https://github.com/mubarakmayyeri/brocamp-student-workspace/blob/master/assets/github/2.jpg)
 
 #### Admin Login
 
-![Admin Login](https://github.com/mubarakmayyeri/brocamp-student-workspace/blob/main/assets/github/3.jpg)
+![Admin Login](https://github.com/mubarakmayyeri/brocamp-student-workspace/blob/master/assets/github/3.jpg)
 
 #### Admin Home
 
-![Admin Home](https://github.com/mubarakmayyeri/brocamp-student-workspace/blob/main/assets/github/4.jpg)
+![Admin Home](https://github.com/mubarakmayyeri/brocamp-student-workspace/blob/master/assets/github/4.jpg)
 
 ## **References**
 
