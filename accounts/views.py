@@ -15,40 +15,43 @@ def home(request):
   return render(request, 'home.html')
 
 def signup(request):
-  if request.method == 'POST':
-    username = request.POST['username']
-    fname = request.POST['fname']
-    lname = request.POST['lname']
-    email = request.POST['email']
-    pass1 = request.POST['pass1']
-    pass2 = request.POST['pass2']
-    
-    if User.objects.filter(username=username):
-      messages.error(request, "User name already exists!!! Please try with a different username.")
-      return redirect(signup)
-    
-    if User.objects.filter(email=email):
-      messages.error(request, "Email already registerd!!!")
-      return redirect(signup)
-    
-    if pass1 == pass2:
-      myuser = User.objects.create_user(username, email, pass1)
-      myuser.first_name = fname
-      myuser.last_name = lname
-      
-      myuser.save()
-      
-      messages.success(request, "Your Account has been successfully created.")
-      return redirect(signin)
-    else:
-      messages.error(request, "Passwords doesn't match!!!")
-      return redirect(signup)
-      
-  
+  if 'username' in request.session:
+    return redirect('workspace')
   else:
-    form = SignupForm()
+    if request.method == 'POST':
+      username = request.POST['username']
+      fname = request.POST['fname']
+      lname = request.POST['lname']
+      email = request.POST['email']
+      pass1 = request.POST['pass1']
+      pass2 = request.POST['pass2']
+      
+      if User.objects.filter(username=username):
+        messages.error(request, "User name already exists!!! Please try with a different username.")
+        return redirect(signup)
+      
+      if User.objects.filter(email=email):
+        messages.error(request, "Email already registerd!!!")
+        return redirect(signup)
+      
+      if pass1 == pass2:
+        myuser = User.objects.create_user(username, email, pass1)
+        myuser.first_name = fname
+        myuser.last_name = lname
+        
+        myuser.save()
+        
+        messages.success(request, "Your Account has been successfully created.")
+        return redirect(signin)
+      else:
+        messages.error(request, "Passwords doesn't match!!!")
+        return redirect(signup)
+        
+    
+    else:
+      form = SignupForm()
 
-    return render(request, 'signup.html', {'form': form})
+      return render(request, 'signup.html', {'form': form})
 
 def signin(request):
     if 'username' in request.session:
