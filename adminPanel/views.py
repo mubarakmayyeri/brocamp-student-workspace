@@ -85,6 +85,7 @@ def deleteStudent(request, id):
     if request.method == 'POST':
       student = User.objects.get(pk=id)
       student.delete()
+      messages.success(request, "Deleted Student record successfully.")
       return redirect(adminHome)
   return redirect(adminLogin)
 

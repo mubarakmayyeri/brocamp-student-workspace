@@ -17,6 +17,7 @@ def home(request):
 def signup(request):
   if 'username' in request.session:
     return redirect('workspace')
+  
   else:
     if request.method == 'POST':
       username = request.POST['username']
